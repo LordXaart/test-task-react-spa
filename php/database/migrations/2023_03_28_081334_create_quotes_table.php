@@ -12,8 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quotes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->engine = 'MyISAM';
+            $table->uuid('id')->primary();
+            $table->unsignedInteger('min');
+            $table->unsignedInteger('max');
+            $table->unsignedInteger('mode');
+            $table->unsignedInteger('mean');
+            $table->unsignedInteger('std');
+            $table->unsignedInteger('count_missed');
+            $table->unsignedInteger('count_quotes');
+            $table->unsignedFloat('calculate_time', 6, 4);
+            $table->timestamp('calculate_started_at');
+            $table->timestamp('created_at')->index();
         });
     }
 
